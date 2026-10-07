@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" width="400" height="300" role="img" aria-label="No photo provided">
+  <rect width="400" height="300" fill="#d1d9e6"/>
+  <g transform="translate(200 138)" fill="none" stroke="#a8b2c4" stroke-width="6" stroke-linecap="round" stroke-linejoin="round">
+    <rect x="-52" y="-38" width="72" height="52" rx="10"/>
+    <rect x="-20" y="-10" width="72" height="52" rx="10"/>
+    <path d="M-8 4h16" stroke="#e98b29"/>
+  </g>
+  <text x="200" y="228" text-anchor="middle" font-family="'JetBrains Mono', ui-monospace, monospace" font-size="13" letter-spacing="2.2" fill="#8d97a8">NO PHOTO PROVIDED</text>
+</svg>

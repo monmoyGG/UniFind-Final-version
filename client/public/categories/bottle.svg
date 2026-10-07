@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 380" width="300" height="380" role="img" aria-label="Bottles">
+  <rect width="300" height="380" rx="18" fill="#d1d9e6"/>
+  <g transform="translate(150 168)" fill="none" stroke="#a8b2c4" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"><path d="M-14-44h28v16l10 14v58a8 8 0 0 1-8 8h-32a8 8 0 0 1-8-8v-58l10-14z"/><path d="M-24 6h48" stroke="#e98b29"/></g>
+  <text x="150" y="300" text-anchor="middle" font-family="'JetBrains Mono', ui-monospace, monospace" font-size="14" letter-spacing="2.4" fill="#8d97a8">BOTTLES</text>
+</svg>

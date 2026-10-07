@@ -1,0 +1,9 @@
+# Never commit the database, member uploads, secrets, or the virtualenv.
+unifind.db
+unifind.db-journal
+uploads/
+.env
+venv/
+.venv/
+__pycache__/
+*.py[cod]

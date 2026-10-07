@@ -1,0 +1,122 @@
+.carousel-container {
+  position: relative;
+  overflow: hidden;
+  border: 1px solid #555;
+  border-radius: 24px;
+  padding: 16px;
+}
+
+.carousel-container.round {
+  border: 1px solid #555;
+}
+
+.carousel-track {
+  display: flex;
+}
+
+.carousel-item {
+  position: relative;
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: space-between;
+  border: 1px solid #555;
+  border-radius: 12px;
+  overflow: hidden;
+  cursor: grab;
+}
+
+.carousel-item:active {
+  cursor: grabbing;
+}
+
+.carousel-item.round {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #060010;
+  border: 1px solid #555;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.carousel-item-header {
+  margin-bottom: 16px;
+  padding: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.carousel-item-header.round {
+  padding: 0;
+  margin: 0;
+}
+
+.carousel-icon-container {
+  display: flex;
+  height: 28px;
+  width: 28px;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background-color: #060010;
+}
+
+.carousel-item-content {
+  padding: 16px 20px 20px;
+}
+
+.carousel-item-title {
+  margin-bottom: 4px;
+  font-weight: 900;
+  font-size: 18px;
+  color: #fff;
+}
+
+.carousel-item-description {
+  font-size: 14px;
+  color: #fff;
+  margin: 0;
+}
+
+.carousel-indicators-container {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+}
+
+.carousel-indicators-container.round {
+  position: absolute;
+  z-index: 20;
+  bottom: 12px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.carousel-indicators {
+  margin-top: 16px;
+  display: flex;
+  width: 150px;
+  justify-content: center;
+  gap: 8px;
+  padding: 8px 0;
+}
+
+.carousel-indicator {
+  height: 8px;
+  width: 8px;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: all 150ms;
+}
+
+.carousel-indicator.active {
+  background-color: #fff;
+}
+
+.carousel-indicator.inactive {
+  background-color: rgba(255, 255, 255, 0.4);
+}

@@ -1,0 +1,17 @@
+# Keep the build context small and never ship local state into the image.
+node_modules/
+dist/
+.git/
+
+backend/venv/
+backend/.venv/
+backend/__pycache__/
+backend/unifind.db
+backend/unifind.db-journal
+backend/uploads/
+backend/.env
+**/__pycache__/
+**/*.py[cod]
+
+.env
+.env.local

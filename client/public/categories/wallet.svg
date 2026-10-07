@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 380" width="300" height="380" role="img" aria-label="Wallets">
+  <rect width="300" height="380" rx="18" fill="#d1d9e6"/>
+  <g transform="translate(150 168)" fill="none" stroke="#a8b2c4" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"><rect x="-44" y="-30" width="88" height="60" rx="10"/><path d="M-44-10h88"/><circle cx="26" cy="10" r="7" stroke="#e98b29"/></g>
+  <text x="150" y="300" text-anchor="middle" font-family="'JetBrains Mono', ui-monospace, monospace" font-size="14" letter-spacing="2.4" fill="#8d97a8">WALLETS</text>
+</svg>

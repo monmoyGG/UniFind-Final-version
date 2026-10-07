@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 380" width="300" height="380" role="img" aria-label="Audio">
+  <rect width="300" height="380" rx="18" fill="#d1d9e6"/>
+  <g transform="translate(150 168)" fill="none" stroke="#a8b2c4" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"><circle cx="-22" cy="-6" r="15"/><circle cx="22" cy="-6" r="15"/><path d="M-22 9v22M22 9v22" stroke="#e98b29"/></g>
+  <text x="150" y="300" text-anchor="middle" font-family="'JetBrains Mono', ui-monospace, monospace" font-size="14" letter-spacing="2.4" fill="#8d97a8">AUDIO</text>
+</svg>

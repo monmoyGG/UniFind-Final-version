@@ -1,0 +1,26 @@
+# Dependencies
+node_modules/
+backend/venv/
+backend/.venv/
+
+# Build output
+dist/
+
+# Python cache
+__pycache__/
+*.py[cod]
+
+# Local data — never commit the database or member photo uploads
+backend/unifind.db
+backend/unifind.db-journal
+backend/uploads/
+
+# Local environment and secrets
+.env
+.env.local
+
+# Editor / OS
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/

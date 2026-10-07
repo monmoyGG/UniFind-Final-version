@@ -1,0 +1,32 @@
+# Render Blueprint. Point Render at this repository and it provisions the
+# service described here, so nothing has to be typed into the dashboard.
+services:
+  - type: web
+    name: unifind
+    runtime: docker
+    plan: free
+    dockerfilePath: ./Dockerfile
+    healthCheckPath: /api/health
+    envVars:
+      # Marks the session cookie Secure. Render terminates HTTPS, so this is safe.
+      - key: UNIFIND_ENV
+        value: production
+      # Render generates a strong random value and keeps it out of the repo.
+      - key: UNIFIND_SECRET_KEY
+        generateValue: true
+      # The free plan has an ephemeral disk, so restore the demo data each boot.
+      - key: UNIFIND_SEED_ON_START
+        value: "true"
+      # Email confirmation. Confirming the code is the only way to finish a
+      # registration, so without a mail server nobody can sign up at all — the
+      # code is issued, logs a warning, and reaches no one. Set these before
+      # inviting real members. The seeded demo accounts are created already
+      # confirmed, so they keep working either way.
+      # - key: UNIFIND_SMTP_HOST
+      #   value: smtp.gmail.com
+      # - key: UNIFIND_SMTP_PORT
+      #   value: "587"
+      # - key: UNIFIND_SMTP_USER
+      #   sync: false
+      # - key: UNIFIND_SMTP_PASSWORD
+      #   sync: false

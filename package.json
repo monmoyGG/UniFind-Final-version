@@ -1,0 +1,38 @@
+{
+  "name": "unifind",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "UniFind — the private Lost & Found network for United International University.",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc --noEmit && vite build",
+    "preview": "vite preview",
+    "check": "tsc --noEmit",
+    "format": "prettier --write ."
+  },
+  "dependencies": {
+    "@hookform/resolvers": "^5.9.1",
+    "@tanstack/react-table": "^8.21.3",
+    "gsap": "^3.15.0",
+    "lucide-react": "^0.453.0",
+    "motion": "^13.1.0",
+    "react": "^19.2.1",
+    "react-dom": "^19.2.1",
+    "react-hook-form": "^7.85.0",
+    "react-router-dom": "^7.1.1",
+    "recharts": "^3.10.1",
+    "sonner": "^2.0.7",
+    "zod": "^4.4.3"
+  },
+  "devDependencies": {
+    "@types/node": "^24.7.0",
+    "@types/react": "^19.2.1",
+    "@types/react-dom": "^19.2.1",
+    "@vitejs/plugin-react": "^5.0.4",
+    "prettier": "^3.6.2",
+    "typescript": "5.9.3",
+    "vite": "^7.1.7"
+  },
+  "packageManager": "pnpm@10.4.1+sha512.c753b6c3ad7afa13af388fa6d808035a008e30ea9993f58c6663e2bc5ff21679aa834db094987129aa4d488b86df57f7b634981b2f827cdcacc698cc0cfb88af"
+}

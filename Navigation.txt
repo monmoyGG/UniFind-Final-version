@@ -1,0 +1,289 @@
+মনময়ের অংশ — ভাইভায় VS Code-এ ফাইল খোঁজার গাইড
+=====================================================
+(Browse · My Posts · Dashboard · Profile)
+
+
+শর্টকাট (Mac হলে Ctrl-এর জায়গায় Cmd)
+-----------------------------------------------------
+P   = Ctrl + P          ফাইলের নাম লিখে ফাইল খোলা
+O   = Ctrl + Shift + O  ফাইলের সব function-এর list, click করলে সেখানে যায়
+F   = Ctrl + F          ফাইলের ভেতরে লেখা খোঁজা
+Ctrl + Shift + F        পুরো প্রজেক্টে খোঁজা
+Ctrl + G                line number দিয়ে সেই line-এ যাওয়া
+Ctrl + click            কোনো নামের উপর -> সরাসরি সেই ফাইলে যায়
+Ctrl + Tab              খোলা ফাইলগুলোর মধ্যে যাওয়া
+
+মনে রাখো:
+- .tsx ফাইলে O চাপলে function আসে, কিন্তু button-এর লেখা (যেমন "Mark resolved")
+  আসে না। ওগুলোর জন্য F ব্যবহার করবে।
+- F-এর box-এ আগে থেকে কোনো শব্দ বসে থাকলে, box-এর ভেতরে Ctrl + A চেপে তারপর লেখো।
+- F-এর box সবসময় এক line-এর মতো ছোট থাকা উচিত। লম্বা হয়ে গেলে (Ctrl/Shift + Enter
+  চাপলে হয়) কিছুই খুঁজে পাবে না -> box-এ Ctrl + A -> Backspace -> আবার হাতে টাইপ করো।
+- এগুলো শুধু খোঁজা, কোড বদলায় না। ভুল করে কোডে কিছু টাইপ হলে Ctrl + Z চাপো,
+  আর Ctrl + S চাপবে না। tab-এর নামের পাশে সাদা ● দেখালে বুঝবে কিছু বদলেছে।
+
+
+ভাগ ১ — কোন feature-এ কোন ফাইল
+=====================================================
+
+১. BROWSE  (page: /browse) — Feature 2
+-----------------------------------------------------
+P-তে লেখো                  খুলে F-এ লেখো
+Browse.tsx                 itemService.list
+FilterPanel.tsx            Most recent
+SearchBar.tsx              SearchBar
+useDebounced.ts            setTimeout
+ItemCard.tsx               ItemCard
+itemService.ts             /api/items
+items.py                   list_items
+models.py                  class Item(         (table: items)
+
+২. MY POSTS  (page: /my-posts)
+-----------------------------------------------------
+P-তে লেখো                  খুলে F-এ লেখো
+MyPosts.tsx                markResolved
+itemService.ts             setStatus
+items.py                   set_item_status
+items.py                   delete_item
+
+৩. DASHBOARD  (page: /dashboard)
+-----------------------------------------------------
+P-তে লেখো                  খুলে F-এ লেখো
+Dashboard.tsx              dashboardService.get
+dashboardService.ts        /api/dashboard
+dashboard.py               def dashboard
+
+৪. PROFILE  (page: /profile)
+-----------------------------------------------------
+P-তে লেখো                  খুলে F-এ লেখো
+Profile.tsx                changePassword
+authService.ts             change-password
+schemas.ts                 changePasswordSchema   (frontend নিয়ম)
+auth.py (backend/routers)  change_password
+models.py                  class User(         (table: users)
+
+সাবধান — একই রকম নাম
+-----------------------------------------------------
+- P-তে "dashboard" লিখলে কয়েকটা আসবে:
+    Dashboard.tsx           (page, frontend)        <- এটা তোমার
+    dashboardService.ts     (service, frontend)     <- এটা তোমার
+    dashboard.py            (backend)               <- এটা তোমার
+    AdminDashboard.tsx      (admin page)            <- এটা তোমার না
+- "auth.py" লিখলে দুটো আসবে:
+    backend/routers/auth.py  -> change_password, logout (এটা লাগবে)
+    backend/auth.py          -> get_current_user, hash_password
+- "schemas" লিখলে দুটো আসবে:
+    client/src/lib/schemas.ts  (frontend form-এর নিয়ম, Zod)
+    backend/schemas.py         (backend-এর নিয়ম, Pydantic)
+- নামের নিচে ছোট করে path দেখায় (যেমন backend/routers)। ওটা দেখে নিশ্চিত হবে।
+
+
+ভাগ ২ — স্যারের সম্ভাব্য প্রশ্ন -> কোথায় দেখাবে
+=====================================================
+
+BROWSE
+-----------------------------------------------------
+1.  Browse page কোথায়?
+    -> P Browse.tsx -> O Browse
+2.  Browse page-এর URL কোথায় সেট?
+    -> P App.tsx -> F /browse                        (line 96)
+3.  Search কীভাবে কাজ করে (frontend)?
+    -> P Browse.tsx -> F useDebounced                (line 44)
+4.  Debounce কী, কোথায় লেখা?
+    -> P useDebounced.ts  (ছোট ফাইল, setTimeout আর clearTimeout)
+5.  Filter কোথা থেকে আসে (URL থেকে)?
+    -> P Browse.tsx -> F params.get
+6.  Filter বদলালে URL কীভাবে বদলায়?
+    -> P Browse.tsx -> O updateFilters               (line 70)
+7.  Clear / সব filter মোছা?
+    -> P Browse.tsx -> O resetFilters                (line 79)
+8.  LOST / FOUND button, dropdown কোথায়?
+    -> P FilterPanel.tsx -> F segmented  (button)   ,  F <select  (dropdown)
+9.  Sort (Most recent / Oldest first)?
+    -> P FilterPanel.tsx -> F Oldest first           (line 98)
+10. Category-র list কোথায়?
+    -> P constants.ts -> F CATEGORIES
+11. Categories menu-র icon?
+    -> P Browse.tsx -> F CATEGORY_ART
+12. Item-এর card?
+    -> P ItemCard.tsx -> O ItemCard
+13. Backend-এ search কোথায়?
+    -> P items.py -> O list_items -> F ilike
+14. ভুল type (?type=xyz) দিলে 422 কেন?
+    -> P schemas.py (backend) -> F ItemType          (line 31)
+15. SQL injection হয় না কেন?
+    -> P items.py -> F parameterises  (comment-এ লেখা আছে)
+16. গোপন তথ্য (identifying_details) শুধু মালিক দেখে কোথায়?
+    -> P helpers.py -> O serialize_item
+
+MY POSTS
+-----------------------------------------------------
+17. My Posts page কোথায়?
+    -> P MyPosts.tsx -> O MyPosts
+18. শুধু নিজের post আসে কীভাবে?
+    -> P MyPosts.tsx -> F mine: true                 (line 23)
+    -> backend: P items.py -> F if mine
+19. ALL / LOST / FOUND / RESOLVED tab-এর সংখ্যা?
+    -> P MyPosts.tsx -> F tab-count                  (line 83)
+20. Mark resolved button?
+    -> P MyPosts.tsx -> O markResolved               (line 34)
+21. Resolved post আবার open করা যায় না কেন (409)?
+    -> P items.py -> O set_item_status -> F cannot be reopened
+22. Withdraw (delete) button?
+    -> P MyPosts.tsx -> O confirmDelete              (line 44)
+23. Delete করলে আসলে মোছে না কেন (soft delete)?
+    -> P items.py -> O delete_item -> F is_removed = True
+24. অন্যের post edit/delete করা যায় না কেন (403)?
+    -> P items.py -> O _require_owner                (line 63)
+25. Confirm popup ("Withdraw this post?")?
+    -> P MyPosts.tsx -> F ConfirmModal
+
+DASHBOARD
+-----------------------------------------------------
+26. Dashboard page কোথায়?
+    -> P Dashboard.tsx -> O Dashboard
+27. ৪টা সংখ্যা (Active posts, Matches...) কোথায় দেখায়?
+    -> P Dashboard.tsx -> F StatCard
+28. সংখ্যাগুলো হিসাব হয় কোথায়?
+    -> P dashboard.py -> O dashboard -> F counts
+29. Pending claims কীভাবে গোনে?
+    -> P dashboard.py -> F pending_claims
+30. "My active reports"-এর ৩টা card?
+    -> P Dashboard.tsx -> F recent_items
+31. Recent activity (শেষ ৫টা notification)?
+    -> P Dashboard.tsx -> F recent_activity
+32. Smart match card (99%) কোথা থেকে আসে?
+    -> P Dashboard.tsx -> F matchService  (আফিফার API: GET /api/matches)
+33. Report lost item / View all / See all button?
+    -> P Dashboard.tsx -> F Report lost item  ,  F View all  ,  F See all
+
+PROFILE
+-----------------------------------------------------
+34. Profile page কোথায়?
+    -> P Profile.tsx -> O Profile
+35. ৪টা সংখ্যা কোথা থেকে আসে?
+    -> P Profile.tsx -> F dashboardService  (Dashboard-এর একই API)
+36. Change password form-এর নিয়ম (৮ অক্ষর, মিলতে হবে)?
+    -> P schemas.ts (client/src/lib) -> F changePasswordSchema
+37. Change password চাপলে কী হয়?
+    -> P Profile.tsx -> O submitChangePassword
+38. Backend-এ password বদল?
+    -> P auth.py (backend/routers) -> O change_password
+39. Password কীভাবে hash হয়?
+    -> P auth.py (backend/auth.py) -> O hash_password
+40. Sign out?
+    -> P Profile.tsx -> F Sign out
+    -> backend: P auth.py (backend/routers) -> O logout
+
+সবার জন্য (যে কেউ জিজ্ঞেস খেতে পারে)
+-----------------------------------------------------
+41. Login check কোথায়?
+    -> P auth.py (backend/auth.py-টা) -> O get_current_user
+42. Router-গুলো কোথায় জোড়া?
+    -> P main.py -> F include_router
+43. Secret key কোথায়?
+    -> P .env.example  (আসল .env খুলবে না, ওতে আসল password আছে)
+44. Frontend থেকে request যায় কীভাবে?
+    -> P api.ts -> O request
+45. Filter থেকে ?type=lost&... কীভাবে বানায়?
+    -> P api.ts -> O toQuery
+46. /api request backend-এ কীভাবে যায় (proxy)?
+    -> P vite.config.ts -> F proxy
+
+
+ভাগ ৩ — মনময়ের অংশের API (মোট ৬টা)
+=====================================================
+প্রতিটা API-এর ৩টা জায়গা: কে call করে (page) -> কোথায় লেখা (service)
+-> backend-এর কোন function। ফাইল খুলে Ctrl + G দিয়ে line number-এ যাও।
+
+API 1 — Item-এর list (Browse, My Posts)
+-----------------------------------------------------
+GET /api/items?search=...&type=...&category=...&location=...&status=...&mine=...&sort=...
+কাজ: filter আর search মিলিয়ে item আনে। Browse, My Posts আর Resolved
+     (আফিফার) — তিনটাই এই একটা API ব্যবহার করে।
+
+  কে call করে :  Browse.tsx                          line 59
+                 MyPosts.tsx  (mine: true)           line 23
+  Service     :  itemService.ts   -> list            line 21
+  Backend     :  items.py         -> list_items()    line 75
+
+API 2 — Post-এর status বদলানো (Mark resolved)
+-----------------------------------------------------
+PATCH /api/items/{id}/status       body: {"status": "resolved"}
+কাজ: open / pending / resolved করা। resolved আবার খোলা যায় না (409)।
+     অন্যের post হলে 403।
+
+  কে call করে :  MyPosts.tsx                         line 36
+  Service     :  itemService.ts   -> setStatus       line 33
+  Backend     :  items.py         -> set_item_status()  line 227
+
+API 3 — Post withdraw (delete)
+-----------------------------------------------------
+DELETE /api/items/{id}
+কাজ: soft delete — row মোছে না, শুধু is_removed = True।
+     অন্যের post হলে 403।
+
+  কে call করে :  MyPosts.tsx                         line 48
+  Service     :  itemService.ts   -> remove          line 36
+  Backend     :  items.py         -> delete_item()   line 260
+
+API 4 — Dashboard-এর summary (Dashboard, Profile)
+-----------------------------------------------------
+GET /api/dashboard
+কাজ: ৪টা সংখ্যা (counts), শেষ ৩টা post (recent_items),
+     শেষ ৫টা notification (recent_activity)।
+
+  কে call করে :  Dashboard.tsx                       line 16
+                 Profile.tsx                         line 21
+  Service     :  dashboardService.ts -> get          line 6
+  Backend     :  dashboard.py     -> dashboard()     line 23
+
+API 5 — Password বদলানো
+-----------------------------------------------------
+POST /api/auth/change-password
+     body: {"current_password": "...", "new_password": "..."}
+কাজ: পুরনো password মিলিয়ে দেখে (না মিললে 400), নতুনটা hash করে save।
+
+  কে call করে :  Profile.tsx                         line 46
+  Service     :  authService.ts   -> changePassword  line 45
+  Backend     :  auth.py (routers) -> change_password()  line 361
+
+API 6 — Sign out
+-----------------------------------------------------
+POST /api/auth/logout
+কাজ: login cookie মুছে দেয়।
+
+  কে call করে :  Profile.tsx (logout())              line 126
+                 -> AuthContext.tsx                  line 77
+  Service     :  authService.ts   -> logout          line 29
+  Backend     :  auth.py (routers) -> logout()       line 199
+
+শুধু link, API তোমার না (জিজ্ঞেস করলে বলবে কোথায় নিয়ে যায়)
+-----------------------------------------------------
+- Edit button (My Posts)       -> /items/{id}/edit, save করলে PUT /api/items/{id}
+                                  (items.py -> update_item(), line 205)
+- Report an item / Report lost item / Report found item
+                               -> নতুন post-এর form (Feature 1)
+- Dashboard-এর Smart match card, See all, Review match
+                               -> আফিফার GET /api/matches
+- Dashboard-এর Recent activity  -> notification, আফিফার অংশ
+
+ভাইভায় API দেখানোর সহজ ক্রম
+-----------------------------------------------------
+page ফাইলে call-টা দেখাও -> Ctrl + click (যেমন itemService)
+-> service ফাইলে URL দেখাও -> Ctrl + P (যেমন items.py)
+-> Ctrl + G দিয়ে line number।
+
+
+জানা bug (স্যার ধরতে পারেন)
+-----------------------------------------------------
+Dashboard-এর "My active reports"-এ resolved post-ও দেখায়।
+কারণ: dashboard.py line 72 -> own_items[:3] resolved বাদ দেয় না।
+(কোড বদলানো হয়নি, শুধু জেনে রাখা।)
+
+
+ভাইভার আগে
+-----------------------------------------------------
+- উপরের ভাগ ১-এর ফাইলগুলো আগে থেকেই খুলে রাখো।
+- সব frontend path client/src/ থেকে, সব backend path backend/ থেকে।
+- একবার নিজে হাতে ৪৬টা প্রশ্নের জায়গা আর ৬টা API খুঁজে প্র্যাকটিস করে নাও।
